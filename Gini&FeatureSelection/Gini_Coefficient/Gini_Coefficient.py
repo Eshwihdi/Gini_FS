@@ -26,7 +26,10 @@ def Gini(df):
 
     df1['CumulativeG%']=df1['CumulativeG']/SumTotG
     df1['CumulativeB%']=df1['CumulativeB']/SumTotB
-    df1['G(i)'] = pd.rolling_sum(df1['CumulativeG%'],2)
+    
+#    df1['G(i)'] = pd.rolling_sum(df1['CumulativeG%'],2)
+    df1['G(i)'] = df1['CumulativeG%'].rolling(2).sum()
+    
     df1['B(i)'] = df1['CumulativeB%'].diff()
     df1['Gini'] = df1['G(i)'] * df1['B(i)']
     df1 = df1.fillna(0)
